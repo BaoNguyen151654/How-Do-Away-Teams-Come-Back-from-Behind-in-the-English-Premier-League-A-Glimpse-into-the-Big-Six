@@ -11,7 +11,7 @@ In this project, I try to explore the answers to 2 key questions:
 
 **What factors are associated with the away team's chances of making a comeback?**
 
-- **Method:** Regression Analysis.
+- **Method:** Logistic Regression with Clustered Robust Standard Errors.
 
 **How can the away team make a comeback, and what are the most common comeback scenarios?**
 
@@ -111,18 +111,10 @@ However, this dataset is imbalanced. Matches where the away team makes a comebac
 
 To check this assumption, I use the Box-Tidwell test. This test is conducted by multiplying each continuous independent feature by its logarithm and adding these interaction terms to the model. If the p-value of any interaction term is significant (< 0.05), it indicates that the linearity assumption between that feature and the log-odds of the target is violated. The model is specified as follows
 
-```python
-logit(p) =
-β0
-+ β1*AST + β2*(AST*log(AST))
-+ β3*HST + β4*(HST*log(HST))
-+ β5*HF  + β6*(HF*log(HF))
-+ β7*AF  + β8*(AF*log(AF))
-+ β9*HC  + β10*(HC*log(HC))
-+ β11*AC + β12*(AC*log(AC))
-+ β13*HY + β14*AY + β15*HR + β16*AR
-+ β17*home_lead_1
-```
+<p align="center">
+  <img src="Images/CodeCogsEqn (2).svg" alt="Clustered Variance">
+</p>
+
 ```python
 # Result
                            Logit Regression Results                           
@@ -164,11 +156,35 @@ The results show that `AST_log` is the only interaction term with a p-value belo
 
 How should “large” be defined in this context? I apply a rule of thumb.
 
-```python
-Event per Variable (EPV) >= Number of events (y = 1) / Number of predictors = 110 / 11 = 10
-```
-- Event per Variable (EPV): The number of events observed for each variable in a dataset (Should be >= 10)
-- Number of events: Total number of events with y = 1
-- Number of predictors: Total number of variables
+<p align="center">
+  <img src="Images/CodeCogsEqn (1).svg" alt="Clustered Variance">
+</p>
+
+- **Event per Variable (EPV)**: The number of events observed for each variable in a dataset (Should be >= 10)
+- **Number of events**: Total number of events with y = 1
+- **Number of predictors**: Total number of variables
 
 While EPV is exactly 10, this assumption is satisfied.
+
+**Model Interpretation**
+
+After checking all assumptions, I will fit a logistic regression model with clustered robust standard errors. This model has two advantages compared to the first model.
+
+**- Clustered robust standard errors:** While the Durbin-Watson test indicates independence of observations over time, this only addresses temporal independence. Observations may also be correlated within clusters; for example, Manchester City’s outstanding performance in an away match against Chelsea might be influenced by their previous encounter, in which they also defeated the same opponent at home. Clustered robust standard errors can account for this by adjusting the covariance matrix for intra-cluster correlation.
+
+<p align="center">
+  <img src="Images/CodeCogsEqn.svg" alt="Clustered Variance">
+</p>
+
+<p align="center">
+  <strong>V_cluster</strong> : The robust estimate of the variance-covariance matrix of the model coefficients.<br>
+  <strong>A</strong> : The Hessian matrix or the Expected Information Matrix.<br>
+  <strong>B</strong> : The Outer Product of Gradients or the Score Variance Matrix.
+</p>
+
+**-**
+
+
+
+
+
