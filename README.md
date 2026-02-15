@@ -164,7 +164,7 @@ How should “large” be defined in this context? I apply a rule of thumb.
 - **Number of events**: Total number of events with y = 1
 - **Number of predictors**: Total number of variables
 
-While EPV is exactly 11, this assumption is satisfied.
+While EPV is exactly 10, this assumption is satisfied.
 
 **Model Interpretation**
 
