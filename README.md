@@ -164,7 +164,7 @@ How should “large” be defined in this context? I apply a rule of thumb.
 - **Number of events**: Total number of events with y = 1
 - **Number of predictors**: Total number of variables
 
-While EPV is exactly 10, this assumption is satisfied.
+While EPV is exactly 11, this assumption is satisfied.
 
 **Model Interpretation**
 
@@ -182,7 +182,12 @@ After checking all assumptions, I will fit a logistic regression model with clus
   <strong>B</strong> : The Outer Product of Gradients or the Score Variance Matrix.
 </p>
 
-**-**
+**-Utilize log(AST) as the predictor:** Because `AST` does not have a linear relationship with the log-odds of the target, I apply a logarithmic transformation to it to improve linearity.
+
+<p align="center">
+  <img src="Images/CodeCogsEqn (3).svg" alt="Clustered Variance">
+</p>
+
 
 
 
