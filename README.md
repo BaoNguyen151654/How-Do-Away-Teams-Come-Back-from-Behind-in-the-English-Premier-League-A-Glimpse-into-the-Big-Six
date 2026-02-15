@@ -106,3 +106,56 @@ This is the most challenging part of the analysis so far. To identify influentia
 </p
 
 However, this dataset is imbalanced. Matches where the away team makes a comeback are rare events. Out of 1,825 matches, only 110 involve a successful away comeback. As a result, when calculating Cook's distance, all points with `away_comeback` = 1 tend to be flagged as outliers. These points are not data errors, they are genuine events. Removing them would only bias the model. I will keep all of these observations and accept that the coefficients may fluctuate substantially.
+
+**Assumption 5: There is a Linear Relationship Between Explanatory Variables and the Logit of the Response Variable**
+
+To check this assumption, I use the Box-Tidwell test. This test is conducted by multiplying each continuous independent feature by its logarithm and adding these interaction terms to the model. If the p-value of any interaction term is significant (< 0.05), it indicates that the linearity assumption between that feature and the log-odds of the target is violated. The model is specified as follows
+
+```python
+logit(p) =
+β0
++ β1*AST + β2*(AST*log(AST))
++ β3*HST + β4*(HST*log(HST))
++ β5*HF  + β6*(HF*log(HF))
++ β7*AF  + β8*(AF*log(AF))
++ β9*HC  + β10*(HC*log(HC))
++ β11*AC + β12*(AC*log(AC))
++ β13*HY + β14*AY + β15*HR + β16*AR
++ β17*home_lead_1
+```
+```python
+# Result
+                           Logit Regression Results                           
+==============================================================================
+Dep. Variable:          away_comeback   No. Observations:                 1825
+Model:                          Logit   Df Residuals:                     1807
+Method:                           MLE   Df Model:                           17
+Date:                Sat, 14 Feb 2026   Pseudo R-squ.:                  0.2354
+Time:                        21:36:04   Log-Likelihood:                -317.76
+converged:                       True   LL-Null:                       -415.59
+Covariance Type:              cluster   LLR p-value:                 2.137e-32
+===============================================================================
+                  coef    std err          z      P>|z|      [0.025      0.975]
+-------------------------------------------------------------------------------
+Intercept      -5.2759      2.714     -1.944      0.052     -10.595       0.043
+AST             1.9412      0.552      3.514      0.000       0.859       3.024
+AST_log        -0.5942      0.203     -2.929      0.003      -0.992      -0.197
+HST            -0.2347      0.322     -0.730      0.465      -0.865       0.396
+HST_log        -0.0027      0.122     -0.022      0.982      -0.242       0.236
+HF              0.6049      0.538      1.123      0.261      -0.450       1.660
+HF_log         -0.1856      0.159     -1.167      0.243      -0.497       0.126
+AF             -0.3918      0.558     -0.702      0.483      -1.485       0.702
+AF_log          0.1015      0.163      0.622      0.534      -0.219       0.422
+HC              0.5635      0.289      1.952      0.051      -0.002       1.129
+HC_log         -0.2061      0.105     -1.956      0.051      -0.413       0.000
+AC             -0.1768      0.277     -0.638      0.524      -0.720       0.367
+AC_log          0.0540      0.092      0.589      0.556      -0.126       0.234
+HY              0.0807      0.090      0.893      0.372      -0.096       0.258
+AY              0.1837      0.109      1.684      0.092      -0.030       0.397
+HR              1.1085      0.318      3.482      0.000       0.485       1.732
+AR             -0.5693      0.373     -1.525      0.127      -1.301       0.163
+home_lead_1    -1.6341      0.541     -3.020      0.003      -2.695      -0.574
+===============================================================================
+```
+
+The results show that `AST_log` is the only interaction term with a p-value below 0.05. To correct for this nonlinearity, I will apply a logarithmic transformation to this variable.
