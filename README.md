@@ -159,3 +159,16 @@ home_lead_1    -1.6341      0.541     -3.020      0.003      -2.695      -0.574
 ```
 
 The results show that `AST_log` is the only interaction term with a p-value below 0.05. To correct for this nonlinearity, I will apply a logarithmic transformation to this variable.
+
+**Assumption 6: The Sample Size is Sufficiently Large**
+
+How should “large” be defined in this context? I apply a rule of thumb.
+
+```python
+Event per Variable (EPV) >= Number of events (y = 1) / Number of predictors = 110 / 11 = 10
+```
+- Event per Variable (EPV): The number of events observed for each variable in a dataset (Should be >= 10)
+- Number of events: Total number of events with y = 1
+- Number of predictors: Total number of variables
+
+While EPV is exactly 10, this assumption is satisfied.
