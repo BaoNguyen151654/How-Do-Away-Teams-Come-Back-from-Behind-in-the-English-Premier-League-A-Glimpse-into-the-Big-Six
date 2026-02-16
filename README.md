@@ -301,6 +301,40 @@ After defining all features, the next step is to implement the K-means algorithm
 
 **- The Clinical Counter-Punchers (Cluster 2):** This cluster exhibits the highest away team comeback rate (3.58%). This is achieved through effective attacking play (highest away_attack) and by capitalizing on opponents’ mistakes (highest home_aggressive).
 
-    
-  
+**Away Comeback Ranking**
 
+<div align="center">
+
+| # | Away Team | Cluster (Mode) | Total comebacks |
+|:---:|:---:|:---:|:---:|
+| 1 | Chelsea | 2 | 12 |
+| 2 | Liverpool | 1 | 9 |
+| 3 | Wolves | 2 | 9 |
+| 4 | Man United | 2 | 9 |
+| 5 | Tottenham | 2 | 7 |
+| 6 | Man City | 2 | 6 |
+| 7 | West Ham | 2 | 6 |
+| 8 | Newcastle | 0 | 6 |
+| 9 | Crystal Palace | 2 | 5 |
+| 10 | Leicester | 1 | 5 |
+| 11 | Bournemouth | 2 | 5 |
+| 12 | Fulham | 2 | 5 |
+| 13 | Everton | 2 | 3 |
+| 14 | Arsenal | 0 | 3 |
+| 15 | Swansea | 2 | 2 |
+| 16 | Brighton | 2 | 2 |
+| 17 | West Brom | 0 | 2 |
+| 18 | Aston Villa | 2 | 2 |
+| 19 | Brentford | 1 | 2 |
+| 20 | Norwich | 1 | 1 |
+| 21 | Sunderland | 2 | 1 |
+| 22 | Stoke | 0 | 1 |
+| 23 | Hull | 1 | 1 |
+| 24 | Southampton | 0 | 1 |
+| 25 | Reading | 1 | 1 |
+| 26 | Watford | 0 | 1 |
+| 27 | Burnley | 2 | 1 |
+| 28 | Sheffield United | 0 | 1 |
+| 29 | Leeds | 2 | 1 |
+
+</div>
