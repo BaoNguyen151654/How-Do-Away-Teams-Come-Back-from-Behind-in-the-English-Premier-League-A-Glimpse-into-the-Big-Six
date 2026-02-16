@@ -289,16 +289,17 @@ After defining all features, the next step is to implement the K-means algorithm
 
 **Cluster Profiles Summary**
 
-| Cluster | n_samples | home_attack_mean | away_attack_mean | home_aggressive_mean | away_aggressive_mean | away_comeback_rate (%) |
-|---------|-----------|-----------------|-----------------|--------------------|--------------------|----------------------|
-| 0       | 483       | -0.001495       | -0.365027       | -0.134240          | 2.406733           | 1.10                 |
-| 1       | 837       | 0.600539        | -0.505926       | -1.146878          | -1.187936          | 1.42                 |
-| 2       | 505       | -0.993918       | 1.187660        | 2.029258           | -0.332970          | 3.51                 |
+| Cluster | n_samples | home_attack_mean | away_attack_mean | home_aggressive_mean | away_aggressive_mean | home_lead_1_mean | away_comeback_rate (%) |
+|---------|-----------|-----------------|-----------------|--------------------|--------------------|-----------------|----------------------|
+| 0       | 483       | -0.001495       | -0.365027       | -0.134240          | 2.406733           | 1.412008        | 1.10                 |
+| 1       | 837       | 0.600539        | -0.505926       | -1.146878          | -1.187936          | 1.499403        | 1.42                 |
+| 2       | 505       | -0.993918       | 1.187660        | 2.029258           | -0.332970          | 1.267327        | 3.51                 |
 
 **- The Deadlocked Aggressors (Cluster 0):** In these matches, the away team commits frequent fouls, as shown by the highest `away_aggressive`. This high aggression increases the risk of receiving red cards, which hinders the away team's ability to recover. Consequently, this group has the lowest comeback rate of only 1.1%, even when the home team shows a lack of attacking options (`home_attack` < 0).
 
 **- The Controlled Underdogs (Cluster 1):** In these matches, the away team maintains high composure (lowest `away_aggressive`). However, the main challenge comes from the home team’s strong performance (`highest home_attack`) and their ability to control the game (lowest `home_aggressive`). As a result, the away team’s comeback rate is only slightly higher than in Cluster 0 (1.42%).
-  
+
+**- The Clinical Counter-Punchers (Cluster 2):** This cluster exhibits the highest away team comeback rate (3.58%). This is achieved through effective attacking play (highest away_attack) and by capitalizing on opponents’ mistakes (highest home_aggressive).
 
     
   
