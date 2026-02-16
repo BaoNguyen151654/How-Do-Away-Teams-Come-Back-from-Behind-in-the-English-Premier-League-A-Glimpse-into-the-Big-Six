@@ -282,17 +282,21 @@ To answer this question, I cluster the data based on the playing styles of both 
 After defining all features, the next step is to implement the K-means algorithm with a specific k value. The optimal k (from 2 to 10) can be found by running multiple models, each model is evaluated using 2 metrics: Silhouette score and Calinski–Harabasz index.
 
 <p align="center">
-  <img src="Images/cluster.png" alt="Clustered Variance">
+  <img src="Images/kmean.png" alt="Clustered Variance">
 </p>
 
 The optimal k is the value that achieves a trade-off between cohesion and segmentation. According to the Elbow Method, it is identified at the point where increasing k yields diminishing returns in terms of the evaluation metric **=> k = 4**
 
 **Cluster Profiles Summary**
 
-| Cluster | Samples | Home Attack (Mean) | Away Attack (Mean) | Home Aggressive (Mean) | Away Aggressive (Mean) |
-| :---: | :---: | :---: | :---: | :---: | :---: |
-| **0** | 25 | -0.7462 | 1.0519 | 5.4575 | 0.5364 |
-| **1** | 85 | -0.8935 | 1.3025 | -0.2136 | -0.1127 |
+| Cluster | n_samples | home_attack_mean | away_attack_mean | home_aggressive_mean | away_aggressive_mean | away_comeback_count |
+|---------|-----------|-----------------|-----------------|--------------------|--------------------|-------------------|
+| 0       | 20        | -0.370381       | 0.050921        | -0.310505          | 2.153136           | 20                |
+| 1       | 7         | 0.846039        | -0.671631       | -1.173506          | -0.427091          | 7                 |
+| 2       | 53        | -1.368646       | 2.086789        | -0.261357          | -0.979586          | 53                |
+| 3       | 30        | -0.685883       | 1.003074        | 4.885250           | 0.522575           | 30                |
+
+
 
 **- Comeback by utilizing home team's disadvantages (Cluster 0):** A high `home_aggressive` indicates that the home team in these matches commits a lot of fouls, which may lead to red cards and force them to play with fewer players. The away team may capitalize on this advantage to make a comeback. 
 
